@@ -1,31 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import css from './App.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContactAction, deleteContactAction } from 'store/contacts/slice';
+import { findContact } from 'store/filter/slice';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const localData = localStorage.getItem('contact');
-    return localData ? JSON.parse(localData) : [];
-  });
-
-  const [filter, setFilter] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.filter.searchQuery);
 
   const handleAddContactBtn = newContact => {
-    setContacts(prevState => [...prevState, newContact]);
+    dispatch(addContactAction(newContact));
   };
 
   const handleFilterChange = e => {
-    setFilter(e.target.value);
+    dispatch(findContact(e.target.value));
   };
 
-  useEffect(() => {
-    localStorage.setItem('contact', JSON.stringify(contacts));
-  }, [contacts]);
-
   const handleDeleteContactBtn = id => {
-    setContacts(prevState => prevState.filter(contact => contact.id !== id));
+    dispatch(deleteContactAction(id));
   };
 
   const checkContact = newContact => {

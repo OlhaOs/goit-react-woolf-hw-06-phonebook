@@ -12,7 +12,9 @@
 }
 .nameInput:focus,
 .numberInput:focus,
-.btn:hover {
+.btn:hover,
+.btn:focus {
+  outline: none;
   border: 1px solid rgb(65, 182, 240);
   outline: none;
   box-shadow: 1px 1px 1px 1px rgb(65, 182, 240);

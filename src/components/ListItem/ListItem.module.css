@@ -5,7 +5,9 @@
   color: rgb(10, 95, 138);
   width: 200px;
 }
-.deleteBtn:hover {
+.deleteBtn:hover,
+.deleteBtn:focus {
+  outline: none;
   border: 1px solid rgb(65, 182, 240);
   outline: none;
   box-shadow: 1px 1px 1px 1px rgb(65, 182, 240);
