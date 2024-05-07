@@ -1,11 +1,20 @@
+import { useDispatch } from 'react-redux';
 import css from './ListItem.module.css';
-const ListItem = ({ contact, onDelete }) => {
+import { deleteContactAction } from 'store/contacts/slice';
+
+export const ListItem = ({ contact }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteContactBtn = id => {
+    dispatch(deleteContactAction(id));
+  };
+
   return (
-    <li className={css.listItem}>
+    <li className={css.listItem} >
       {contact.name}: {contact.number}
       <button
         type="button"
-        onClick={() => onDelete(contact.id)}
+        onClick={() => handleDeleteContactBtn(contact.id)}
         className={css.deleteBtn}
       >
         Delete
@@ -13,4 +22,3 @@ const ListItem = ({ contact, onDelete }) => {
     </li>
   );
 };
-export default ListItem;
